@@ -1,0 +1,153 @@
+.home {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.hero {
+  background-color: #00457c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.services ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.services li {
+  background-color: #f4f4f4;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.about {
+  margin: 20px;
+  padding: 20px;
+  background-color: #e9ecef;
+  border-left: 5px solid #00457c;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+button {
+  background-color: #0084ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.hero {
+  background-color: #0A192F;  /* A deep navy blue */
+  color: #E6F1FF;  /* Light blue for readability */
+  padding: 40px 20px;  /* Increase padding for better spacing */
+  text-align: center;
+  /* background-image: url('/path-to-image.jpg');  Optional: background image */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  font-size: 1em;
+  font-weight: bold;
+  padding: 12px 28px;
+}
+
+.services ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.services li {
+  background-color: #f4f4f4;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.services h3 {
+  color: #333;
+}
+
+.services p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.about {
+  background-color: #ffffff;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  line-height: 1.8;
+}
+
+.about h2 {
+  color: #0A192F; /* A deep navy blue, adding a touch of seriousness and professionalism */
+  margin-bottom: 20px;
+}
+
+.footer {
+  background-color: #0A192F;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+}
+
+.footer-content, .footer-links, .social-icons {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.footer-links li, .social-icons li {
+  margin: 0 10px;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.social-icons img {
+  width: 24px; /* Adjust size as needed */
+}
