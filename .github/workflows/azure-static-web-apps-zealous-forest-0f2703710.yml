@@ -14,7 +14,9 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+
     steps:
+      # Checkout code
       - uses: actions/checkout@v3
         with:
           submodules: true
@@ -24,7 +26,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust as per your project's requirement
+          node-version: '14'  # Specify your Node.js version here
 
       # Install npm dependencies and build the React app
       - name: Install Dependencies and Build React App
@@ -32,12 +34,13 @@ jobs:
           cd client
           npm install
           npm run build
+        working-directory: .
 
       # Set up Python for the Flask API
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Adjust as per your project's requirement
+          python-version: '3.8'  # Specify your Python version here
 
       # Install pip dependencies for Flask
       - name: Install Python dependencies
@@ -45,26 +48,31 @@ jobs:
           cd app
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+        working-directory: .
+
+      # List build output for debugging (optional step to verify build output)
+      - name: List build output files
+        run: ls -la client/build
+        working-directory: .
 
       # Build and Deploy the full application
       - name: Build And Deploy
-        id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_FOREST_0F2703710 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e., PR comments)
           action: "upload"
-          app_location: "/client"  # Frontend path
-          api_location: "/app"  # Backend path, assuming Flask does not need a build step
-          output_location: "client/build"  # Frontend build output
+          app_location: "client"  # App source code path, assuming React frontend
+          api_location: "app"  # API source code path, assuming Flask backend
+          output_location: "client/build"  # Frontend build output directory
 
+  # Job to handle pull request closure
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
       - name: Close Pull Request
-        id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_FOREST_0F2703710 }}
