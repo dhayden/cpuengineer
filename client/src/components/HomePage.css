@@ -1,65 +1,16 @@
+/* Base Styles */
 .home {
   font-family: Arial, sans-serif;
   color: #333;
   line-height: 1.6;
 }
 
+/* Hero Section */
 .hero {
-  background-color: #00457c;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-.services ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.services li {
-  background-color: #f4f4f4;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.about {
-  margin: 20px;
-  padding: 20px;
-  background-color: #e9ecef;
-  border-left: 5px solid #00457c;
-}
-
-.footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-button {
-  background-color: #0084ff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.hero {
-  background-color: #0A192F;  /* A deep navy blue */
+  background-color: #0A192F;  /* Deep navy blue for a professional look */
   color: #E6F1FF;  /* Light blue for readability */
-  padding: 40px 20px;  /* Increase padding for better spacing */
+  padding: 40px 20px;  /* Increased padding for better spacing */
   text-align: center;
-  /* background-image: url('/path-to-image.jpg');  Optional: background image */
   background-size: cover;
   background-position: center;
 }
@@ -75,22 +26,38 @@ button:hover {
 }
 
 .hero button {
-  font-size: 1em;
-  font-weight: bold;
+  background-color: #0084ff;
+  color: white;
+  border: none;
   padding: 12px 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.services ul {
-  list-style-type: none;
-  padding: 0;
+.hero button:hover {
+  background-color: #0056b3;
+}
+
+/* Services Section */
+.section-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  background-color: #f9f9f9;
 }
 
 .services li {
-  background-color: #f4f4f4;
-  margin: 10px 0;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .services h3 {
@@ -99,9 +66,9 @@ button:hover {
 
 .services p {
   color: #666;
-  line-height: 1.6;
 }
 
+/* About Section */
 .about {
   background-color: #ffffff;
   padding: 40px;
@@ -112,42 +79,45 @@ button:hover {
 }
 
 .about h2 {
-  color: #0A192F; /* A deep navy blue, adding a touch of seriousness and professionalism */
+  color: #0A192F;
   margin-bottom: 20px;
 }
 
+/* Footer */
 .footer {
   background-color: #0A192F;
-  color: #fff;
+  color: white;
   text-align: center;
   padding: 20px 0;
-  position: relative;
-  width: 100%;
 }
 
-.footer-content, .footer-links, .social-icons {
+.social-icons {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0;
+  margin: 10px 0;
 }
 
-.footer-links li, .social-icons li {
+.social-icons li {
   margin: 0 10px;
 }
 
-.footer a {
+.social-icons a {
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s;
 }
 
-.footer a:hover {
+.social-icons a:hover {
   text-decoration: underline;
 }
 
 .social-icons img {
-  width: 24px; /* Adjust size as needed */
+  width: 24px;
+}
+
+@media (max-width: 768px) {
+  .services {
+    grid-template-columns: 1fr;  /* Stack on smaller screens */
+  }
 }

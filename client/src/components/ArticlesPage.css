@@ -27,7 +27,10 @@
 }
 
 .article-image {
-  width: 100%;  /* Responsive image width */
-  height: auto;
-  margin-top: 10px;
+  width: 200px; /* Set the width you prefer */
+  height: auto; /* Maintain the aspect ratio */
+  display: block; /* Ensures the image is on its own line */
+  margin: 0 auto; /* Centers the image horizontally */
+  padding-bottom: 20px; /* Adds some space below the image */
 }
+
