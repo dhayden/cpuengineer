@@ -19,24 +19,44 @@ jobs:
         with:
           submodules: true
           lfs: false
+
+      # Set up Node.js for the client side
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Specify your Node.js version here
-      - name: Install Dependencies
-        run: npm install
-      - name: Run Build Script
-        run: npm run build  # Ensure your package.json has a "build" script
+          node-version: '14'  # Adjust as per your project's requirement
+
+      # Install npm dependencies and build the React app
+      - name: Install Dependencies and Build React App
+        run: |
+          cd client
+          npm install
+          npm run build
+
+      # Set up Python for the Flask API
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Adjust as per your project's requirement
+
+      # Install pip dependencies for Flask
+      - name: Install Python dependencies
+        run: |
+          cd app
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Build and Deploy the full application
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_FOREST_0F2703710 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          app_location: "/"  # This should be the root directory if your build script is at the root
-          api_location: ""  # Set this to empty if no API
-          output_location: "build"  # Adjust this to match where your build script outputs files
+          app_location: "/client"  # Frontend path
+          api_location: "/app"  # Backend path, assuming Flask does not need a build step
+          output_location: "client/build"  # Frontend build output
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
