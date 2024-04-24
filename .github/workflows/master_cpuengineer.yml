@@ -39,9 +39,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,8 +47,6 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -61,7 +57,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -69,10 +64,15 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_512596C68B814323A81D461C29DBDFAC }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3EB53CFF3F07419BA83FB0DF4B34218F }}
 
+      - name: Set Production Startup Command
+        run: az webapp config set --resource-group yourResourceGroup --name cpuengineer --startup-file "gunicorn 'app:create_app()' --bind 0.0.0.0:8000"
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'cpuengineer'
           slot-name: 'Production'
-          
+
+    permissions:
+      id-token: write #This is required for requesting the JWT
