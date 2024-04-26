@@ -36,16 +36,16 @@ function HomePage() {
             </section>
         </div>
 
-        <footer className="footer">
-            <div className="footer-content">
-                <p>Connect with me:</p>
-                <ul className="social-links">
-                    <li><a href="https://linkedin.com/in/derrickhayden">LinkedIn</a></li>
-                    <li><a href="https://github.com/dhayden">GitHub</a></li>
-                    <li>Email: hayden.programmer at gmail</li>
-                </ul>
-            </div>
-        </footer>
+        {/*<footer className="footer">*/}
+        {/*    <div className="footer-content">*/}
+        {/*        <p>Connect with me:</p>*/}
+        {/*        <ul className="social-links">*/}
+        {/*            <li><a href="https://linkedin.com/in/derrickhayden">LinkedIn</a></li>*/}
+        {/*            <li><a href="https://github.com/dhayden">GitHub</a></li>*/}
+        {/*            <li>Email: hayden.programmer at gmail</li>*/}
+        {/*        </ul>*/}
+        {/*    </div>*/}
+        {/*</footer>*/}
 
     </div>
   );
