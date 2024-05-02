@@ -4,9 +4,11 @@ from flask_cors import CORS
 from azure.storage.blob import BlobServiceClient, BlobClient
 import os
 
-
 main = Blueprint('main', __name__)
-CORS(main, origins=["http://127.0.0.1:5000", "http://localhost:5000"])  # Specify the allowed origins
+
+# Set up CORS with environment-specific origins
+cors_origins = os.getenv('CORS_ORIGINS', "http://127.0.0.1:5000,http://localhost:5000").split(',')
+CORS(main, origins=cors_origins, supports_credentials=True)
 
 # Azure Blob Storage details
 connection_string = os.getenv('AZURE_CONNECTION_STRING')
@@ -25,13 +27,6 @@ def get_blob_content(connection_string, container_name, blob_name):
 @main.route('/articles')
 def home():
     return send_from_directory('../client/build', 'index.html')
-
-
-# @main.route('/api/generate-article', methods=['GET'])
-# def get_article():
-#     prompt = "Here are some reasons why programming every day is beneficial:"
-#     article = generate_article(prompt)
-#     return jsonify({"article": article})
 
 
 @main.route('/api/get-txt', methods=['GET'])
