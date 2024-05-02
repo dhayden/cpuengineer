@@ -65,7 +65,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3EB53CFF3F07419BA83FB0DF4B34218F }}
 
       - name: Set Production Startup Command
-        run: az webapp config set --resource-group yourResourceGroup --name cpuengineer --startup-file "gunicorn 'app:create_app()' --bind 0.0.0.0:8000"
+        run: az webapp config set --resource-group cpuengineer_group --name cpuengineer --startup-file "gunicorn 'app:create_app()' --bind 0.0.0.0:8000"
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2

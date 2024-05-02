@@ -27,11 +27,11 @@ def home():
     return send_from_directory('../client/build', 'index.html')
 
 
-@main.route('/api/generate-article', methods=['GET'])
-def get_article():
-    prompt = "Here are some reasons why programming every day is beneficial:"
-    article = generate_article(prompt)
-    return jsonify({"article": article})
+# @main.route('/api/generate-article', methods=['GET'])
+# def get_article():
+#     prompt = "Here are some reasons why programming every day is beneficial:"
+#     article = generate_article(prompt)
+#     return jsonify({"article": article})
 
 
 @main.route('/api/get-txt', methods=['GET'])
