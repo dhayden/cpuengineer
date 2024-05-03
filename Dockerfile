@@ -22,4 +22,4 @@ ENV WEBSITE_HOSTNAME cpuengineer.azurewebsites.net
 ENV WEBSITE_INSTANCE_ID f673f0d9d834b9e1b1a9af3085303f4dbdaafec9f8bbea963b41349b795a6ee6
 
 # Run gunicorn when the container launches
-CMD ["gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "cpuengineer.app:create_app()", "--bind", "0.0.0.0:8000"]
