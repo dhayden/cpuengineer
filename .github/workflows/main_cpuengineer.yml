@@ -40,7 +40,7 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install -r app/requirements.txt
+          pip install -r requirements.txt
 
       # Zip artifact for deployment
       - name: Zip artifact for deployment
