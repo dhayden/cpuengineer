@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, send_from_directory
-from .article_generation_script import generate_article
 from flask_cors import CORS
 from azure.storage.blob import BlobServiceClient, BlobClient
 import os
