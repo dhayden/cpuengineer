@@ -30,3 +30,5 @@ gen
 # Ignore Python bytecode:
 __pycache__/
 *.pyc
+.env
+/.env
