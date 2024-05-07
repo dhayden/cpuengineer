@@ -20,7 +20,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Updated to a more recent LTS version of Node.js
+          node-version: '16'
+          registry-url: 'https://npm.pkg.github.com/'
+          scope: '@your-org'  # Replace with your organization's scope or username
+          always-auth: true
 
       # Install npm dependencies and build React app
       - name: Install and build React app
@@ -28,31 +31,42 @@ jobs:
           cd client
           npm install
           npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.MY_PAT }}
 
       # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # Updated to a newer version of Python
+          python-version: '3.9'
 
-      # Create virtual environment and install dependencies
-      - name: Create and start virtual environment
+      # Create a virtual environment and install dependencies
+      - name: Install Python dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Optional: Run tests here for both frontend and backend
+      # Optional: Run tests for both front-end and back-end
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          # Run your Python backend tests
+          pytest
 
-      # Zip artifact for deployment
+          # Assuming you have some tests in your client directory for React
+          cd client
+          npm test
+
+      # Zip artifact for deployment (if needed)
       - name: Zip artifact for deployment
         run: |
-          zip -r release.zip ./* -x "venv/*" -x "*.git*" -x "node_modules/*" -x "client/node_modules/*"
+          zip -r full-stack-app.zip . -x "venv/*" "*.git*" "node_modules/*" "client/node_modules/*"
 
-      # Upload artifact for deployment jobs
+      # Upload artifact (if needed)
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v3
         with:
           name: full-stack-app
-          path: release.zip
+          path: full-stack-app.zip
