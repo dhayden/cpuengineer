@@ -18,9 +18,9 @@ jobs:
 
       # Set up Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'  # Updated to a more recent LTS version of Node.js
 
       # Install npm dependencies and build React app
       - name: Install and build React app
@@ -31,21 +31,24 @@ jobs:
 
       # Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.9'  # Updated to a newer version of Python
 
       # Create virtual environment and install dependencies
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip install --upgrade pip
           pip install -r requirements.txt
+
+      # Optional: Run tests here for both frontend and backend
 
       # Zip artifact for deployment
       - name: Zip artifact for deployment
         run: |
-          zip -r release.zip ./* -x "venv/*" -x "*.git*"
+          zip -r release.zip ./* -x "venv/*" -x "*.git*" -x "node_modules/*" -x "client/node_modules/*"
 
       # Upload artifact for deployment jobs
       - name: Upload artifact for deployment

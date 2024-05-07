@@ -1,8 +1,7 @@
-Werkzeug==2.0.3
-Flask==2.1.2
-gunicorn==20.1.0
-Flask-CORS
-flask
-requests
-numpy
-azure-storage-blob
+Werkzeug==3.0.3  # Updated to the latest version as of the time of this writing
+Flask==3.0.3
+gunicorn==22.0.0
+Flask-CORS==4.0.1  # Specify version to ensure compatibility
+requests==2.31.0  # Updated to the latest version
+numpy==1.26.4  # Updated to the latest version, ensure compatibility with Python version
+azure-storage-blob==12.19.1  # Updated to the latest version

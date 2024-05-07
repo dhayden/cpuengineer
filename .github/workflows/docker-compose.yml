@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - WEBSITE_USE_DIAGNOSTIC_SERVER
+      - WEBSITE_SITE_NAME
+      - WEBSITE_AUTH_ENABLED
+      - WEBSITE_ROLE_INSTANCE_ID
+      - WEBSITE_HOSTNAME
+      - WEBSITE_INSTANCE_ID
