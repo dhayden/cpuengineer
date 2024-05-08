@@ -11,14 +11,20 @@ RUN apt-get update && \
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy only the necessary directory for Python backend
+COPY ./app /app
+COPY requirements.txt /app/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install npm dependencies for React
+# Set the working directory for the client to install npm dependencies
 WORKDIR /app/client
+
+# Copy the client directory
+COPY ./client /app/client
+
+# Install npm dependencies for React
 RUN npm install
 
 # Build the React application
@@ -38,10 +44,8 @@ ENV WEBSITE_ROLE_INSTANCE_ID=0
 ENV WEBSITE_HOSTNAME=${WEBSITE_HOSTNAME}
 ENV WEBSITE_INSTANCE_ID=${WEBSITE_INSTANCE_ID}
 
-# Ensure the static directory exists
-RUN mkdir -p /app/static
-# Copy the React build to the Flask static directory
-RUN cp -r client/build/* static/
+# Ensure the static directory exists and copy the React build to the Flask static directory
+RUN mkdir -p /app/static && cp -r /app/client/build/* /app/static/
 
 # Run gunicorn when the container launches
 CMD ["gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000"]
