@@ -2,7 +2,6 @@
 FROM python:3.11-slim
 
 # Install Node.js
-# NodeSource is a reliable source for installing Node.js on Debian-based images
 RUN apt-get update && \
     apt-get install -y curl gnupg && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -12,12 +11,10 @@ RUN apt-get update && \
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy only the necessary dependency files
-COPY ./app/requirements.txt /app/
-COPY ./client/package.json /app/client/
-COPY ./client/package-lock.json /app/client/  # Ensure consistency in npm dependencies
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install Flask dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install npm dependencies for React
@@ -30,13 +27,6 @@ RUN npm run build
 # Go back to the main app directory
 WORKDIR /app
 
-# Copy the Flask application
-COPY ./app /app
-
-# Copy the React build to the appropriate directory served by Flask
-# Assuming Flask serves static files from /app/static, you might need to adjust this depending on your Flask setup
-COPY --from=0 /app/client/build /app/static
-
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
@@ -48,5 +38,10 @@ ENV WEBSITE_ROLE_INSTANCE_ID=0
 ENV WEBSITE_HOSTNAME=${WEBSITE_HOSTNAME}
 ENV WEBSITE_INSTANCE_ID=${WEBSITE_INSTANCE_ID}
 
+# Ensure the static directory exists
+RUN mkdir -p /app/static
+# Copy the React build to the Flask static directory
+RUN cp -r client/build/* static/
+
 # Run gunicorn when the container launches
-CMD ["gunicorn", "cpuengineer.app:create_app()", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000"]
