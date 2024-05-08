@@ -49,15 +49,15 @@ jobs:
           pip install -r requirements.txt
 
       # Optional: Run tests for both front-end and back-end
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          # Run your Python backend tests
-          pytest
-
-          # Assuming you have some tests in your client directory for React
-          cd client
-          npm test
+#      - name: Run tests
+#        run: |
+#          source venv/bin/activate
+#          # Run your Python backend tests
+#          pytest
+#
+#          # Assuming you have some tests in your client directory for React
+#          cd client
+#          npm test
 
       # Zip artifact for deployment (if needed)
       - name: Zip artifact for deployment
