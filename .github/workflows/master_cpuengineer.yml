@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # This allows manual triggering of the workflow from GitHub UI.
 
 env:
-  IMAGE_NAME: cpuengineer
+  IMAGE_NAME: cpuengineer-website
   REGISTRY: ghcr.io/${{ github.repository_owner }}  # Automatically uses the repo owner's GHCR.
 
 jobs:
