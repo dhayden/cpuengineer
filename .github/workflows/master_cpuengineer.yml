@@ -29,6 +29,7 @@ jobs:
 
     - name: Build and push Docker image using Docker Compose
       run: |
+        cd .github/workflows
         docker-compose build  # Builds the Docker images using docker-compose.yml.
         docker-compose push  # Pushes the built images to the defined registry.
 
