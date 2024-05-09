@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
 
 jobs:
   build-and-deploy:
@@ -56,16 +52,16 @@ jobs:
         run: |
           docker-compose build
         env:
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
-          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: cpuengineerimage1
+          REGISTRY: ghcr.io/${{ github.repository_owner }}
 
       # Push Docker images to registry using docker-compose
       - name: Push Docker images
         run: |
           docker-compose push
         env:
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
-          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: cpuengineerimage1
+          REGISTRY: ghcr.io/${{ github.repository_owner }}
 
       # Zip artifact for deployment (if needed)
       - name: Zip artifact for deployment
