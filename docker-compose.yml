@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/${REGISTRY_OWNER}/cpuengineerimage1:${TAG}  # These variables should be set in the environment or CI/CD pipeline
+    image: ghcr.io/dhayden/cpuengineerimage1:latest  # These variables should be set in the environment or CI/CD pipeline
     ports:
       - "8000:8000"
     environment:
