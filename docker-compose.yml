@@ -2,21 +2,21 @@ version: '3.8'
 services:
   web:
     build:
-        context: .
-        dockerfile: Dockerfile
-    image: ghcr.io/dhayden/cpuengineerimage1:latest
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/${REGISTRY_OWNER}/cpuengineerimage1:${TAG}  # These variables should be set in the environment or CI/CD pipeline
     ports:
       - "8000:8000"
     environment:
-      - AZURE_CONNECTION_STRING
-      - AZURE_CONTAINER_NAME
-      - AZURE_BLOB_NAME
-      - WEBSITE_USE_DIAGNOSTIC_SERVER
-      - WEBSITE_SITE_NAME
-      - WEBSITE_AUTH_ENABLED
-      - WEBSITE_ROLE_INSTANCE_ID
-      - WEBSITE_HOSTNAME
-      - WEBSITE_INSTANCE_ID
+      AZURE_CONNECTION_STRING: ${AZURE_CONNECTION_STRING}
+      AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME}
+      AZURE_BLOB_NAME: ${AZURE_BLOB_NAME}
+      WEBSITE_USE_DIAGNOSTIC_SERVER: ${WEBSITE_USE_DIAGNOSTIC_SERVER}
+      WEBSITE_SITE_NAME: ${WEBSITE_SITE_NAME}
+      WEBSITE_AUTH_ENABLED: ${WEBSITE_AUTH_ENABLED}
+      WEBSITE_ROLE_INSTANCE_ID: ${WEBSITE_ROLE_INSTANCE_ID}
+      WEBSITE_HOSTNAME: ${WEBSITE_HOSTNAME}
+      WEBSITE_INSTANCE_ID: ${WEBSITE_INSTANCE_ID}
     volumes:
       - type: bind
         source: ./data

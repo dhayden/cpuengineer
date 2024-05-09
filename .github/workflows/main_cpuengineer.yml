@@ -12,9 +12,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: cpuengineerimage1
-      REGISTRY: ghcr.io/${{ github.repository_owner }}
     steps:
       - uses: actions/checkout@v4
 
@@ -50,7 +47,11 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Build Docker images
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # Build Docker images using docker-compose
       - name: Build Docker images
         run: |
           docker-compose build
@@ -58,7 +59,7 @@ jobs:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
           REGISTRY: ${{ env.REGISTRY }}
 
-      # Push Docker images to registry
+      # Push Docker images to registry using docker-compose
       - name: Push Docker images
         run: |
           docker-compose push
